@@ -1,0 +1,12 @@
+---
+import Layout from "../../components/layout.astro";
+import ExerciseListing from "../../components/exercise/exercise-list.astro";
+import SlugList from "../../components/slug-list.astro";
+
+import { exercises, years } from "../../helpers";
+---
+
+<Layout>
+  <SlugList slugs={years} generateLink={(slug) => `/date/${encodeURI(slug)}`} />
+  <ExerciseListing exercises={exercises} />
+</Layout>

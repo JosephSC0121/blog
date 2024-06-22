@@ -1,0 +1,64 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../components/layout.astro";
+import Tag from "../../components/tag.astro";
+
+// MDX Components
+import DateTag from "../../components/date-tag.astro";
+import ExerciseContent from "../../components/exercise/exercise-content.astro";
+
+export async function getStaticPaths() {
+  const exercises = await getCollection("blog");
+  return exercises.map((exercise) => ({
+    params: { slug: exercise.slug },
+    props: { exercise },
+  }));
+}
+
+type Props = {
+  exercise: CollectionEntry<"blog">;
+};
+
+const { exercise } = Astro.props;
+---
+
+<Layout title={exercise.data.title} description={exercise.data.description}>
+  <div class="flex flex-col gap-8 md:w-5/6 px-4 py-12 sm:px-8 mx-auto">
+    <div class="flex flex-col gap-6 items-center justify-center max-w-screen-sm mx-auto">
+      <h1 id="header" class="text-5xl text-center font-title font-black">{exercise.data.title}</h1>
+      <div class="flex items-center justify-center gap-2">
+        <DateTag date={exercise.data.date} />
+        {exercise.data.tags?.map((tag) => <Tag tag={tag} />)}
+      </div>
+      <p class="text-lg text-center text-white-700 max-w-[480px]">{exercise.data.description}</p>
+    </div>
+    {
+      exercise.data.cover && (
+        <img src={`${exercise.data.cover}?w=1200&q=80`} alt="cover" class="w-full max-w-screen-md mx-auto rounded-lg" />
+      )
+    }
+  </div>
+  <div class="relative flex flex-col gap-2 max-w-screen-md mx-auto px-4 sm:px-6 text-base text-white-700">
+    <ExerciseContent exercise={exercise} />
+  </div>
+</Layout>
+
+<script>
+  import { annotate, annotationGroup } from "rough-notation";
+  const notions = document.querySelectorAll("span[data-notion-identity]");
+  const annotations = new Array(notions.length).fill(0).map((_, index) => {
+    const node = notions[index] as HTMLSpanElement;
+    const type = node.dataset.notionType;
+    const color = node.dataset.notionColor;
+    const strokeWidth = node.dataset.notionStrokewidth;
+    return annotate(node, {
+      type: (type as "underline") ?? "underline",
+      color: color ?? "red",
+      animate: false,
+      multiline: type === "bracket" ? false : true,
+      brackets: ["left", "right"],
+      strokeWidth: Number(strokeWidth) ?? 1.5,
+    });
+  });
+  annotationGroup(annotations).show();
+</script>

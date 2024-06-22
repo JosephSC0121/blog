@@ -1,0 +1,43 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../components/layout.astro";
+import ExerciseListing from "../../components/exercise/exercise-list.astro";
+import SlugList from "../../components/slug-list.astro";
+
+type Exercise = CollectionEntry<"blog">;
+
+export async function getStaticPaths() {
+  const exercises = await getCollection("blog");
+  const yearSet = new Set<string>();
+  const yearMap = exercises.reduce(
+    (map, exercise) => {
+      const date = exercise.data.date;
+      const year = new Date(date).getFullYear().toString();
+      if (year) {
+        yearSet.add(year);
+        map[year] = (map[year] || []).concat(exercise);
+      }
+      return map;
+    },
+    {} as Record<string, Exercise[]>,
+  );
+  const years = Array.from(yearSet).sort();
+  return Object.entries(yearMap).map(([year, exercises]) => ({
+    params: { slug: decodeURI(year) },
+    props: { slug: decodeURI(year), exercises, years },
+  }));
+}
+
+type Props = {
+  slug: string;
+  exercises: exercise[];
+  years: string[];
+};
+
+const { slug, exercises, years } = Astro.props;
+---
+
+<Layout>
+  <SlugList slugs={years} activeSlug={slug} generateLink={(slug) => `/date/${encodeURI(slug)}`} />
+  <ExerciseListing exercises={exercises} />
+</Layout>

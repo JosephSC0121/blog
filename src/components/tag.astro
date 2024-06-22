@@ -1,0 +1,15 @@
+---
+type Props = {
+  tag: string;
+};
+
+const { tag } = Astro.props;
+---
+
+<a
+  href={`/tags/${encodeURI(tag)}`}
+  target="_self"
+  class="px-2.5 py-1 rounded-lg text-xs text-black font-medium bg-primary capitalize"
+>
+  {tag}
+</a>
