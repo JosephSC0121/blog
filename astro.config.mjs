@@ -25,7 +25,6 @@ export default defineConfig({
     }),
     sitemap(),
     tailwind(),
-    react(),
   ],
   output: "static",
 });

@@ -9,10 +9,12 @@ module.exports = {
         sans: ["Inter"].concat(defaultTheme.fontFamily.sans),
         title: ["Noto Sans", "Familjen Grotesk"].concat(defaultTheme.fontFamily.sans),
       },
-      colors : {
+      colors: {
         primary: "#E7D4B5",
         secondary: "#B6C7AA",
-      }
+      }, width: {
+        '1/10': '10%',
+      },
     },
   },
   plugins: [],
