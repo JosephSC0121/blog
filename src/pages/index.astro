@@ -1,6 +1,7 @@
 ---
 import Layout from "../components/layout.astro";
-import BentoGrid from "../components/BentoGrid.astro";
+import ExerciseListing from "../components/exercise/exercise-list.astro";
+import { exercises } from "../helpers";
 ---
 
 <Layout>
@@ -37,6 +38,6 @@ import BentoGrid from "../components/BentoGrid.astro";
             >.
         </p>
         <h2 class="text-4xl font-bold m-6">Progreso</h2>
-        <BentoGrid />
+        <ExerciseListing exercises={exercises} />
     </div>
 </Layout>

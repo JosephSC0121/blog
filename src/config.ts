@@ -20,10 +20,5 @@ export const MENUS = [
     link: "/date",
     target: "_self",
   },
-  {
-    title: "GitHub",
-    link: "https://github.com/JosephSC0121",
-    target: "_blank",
-  },
 ];
 

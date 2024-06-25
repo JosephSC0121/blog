@@ -1,13 +1,40 @@
 ---
 import { FOOTER_CONTENT } from "../config";
+import Bmc from "../../public/Bmc.astro";
+import Linkedin from "../../public/Linkedin.astro";
+import Github from "../../public/Github.astro";
 ---
 
 <footer>
-  <div class="flex flex-row items-center justify-center max-w-screen-md h-96 mx-auto px-4 sm:px-6">
+  <div
+    class="flex flex-row items-center justify-center max-w-screen-md h-96 mx-auto px-4 sm:px-6"
+  >
     <p
       class="text-4xl leading-[60px] bg-clip-text text-center text-transparent bg-gradient-to-r from-orange-600 to-amber-600 font-title font-black"
     >
-      {FOOTER_CONTENT}
     </p>
+    <div class="flex flex-col md:flex-row justify-center items-center">
+      <a
+        class="flex flex-row items-center rounded-xl p-5 text-xl"
+        href="https://www.linkedin.com/in/joseph-cristian-silva-casas/"
+      >
+        <Linkedin />
+        @joseph-silva-casas
+        <a
+          class="flex flex-row items-center rounded-xl p-5 color-whitetext-xl text-black bg-primary"
+          href="https://buymeacoffee.com/josephsc0121"
+        >
+          <Bmc />
+          Buy me a coffe
+          <a
+            class="flex flex-row items-center rounded-xl p-5 text-xl"
+            href="https://github.com/JosephSC0121"
+          >
+            <Github />
+            @JosephSC0121
+          </a>
+        </a>
+      </a>
+    </div>
   </div>
 </footer>
