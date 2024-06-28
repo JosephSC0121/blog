@@ -15,8 +15,27 @@ const { title, description } = Astro.props;
 <!doctype html>
 <html lang="en" class="text-white-800">
   <head>
-    <Meta title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE} description={description ?? SITE_DESCRIPTION} />
+    <!-- Google tag (gtag.js) -->
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=MEASUREMENT_ID"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "MEASUREMENT_ID");
+    </script>
+
+    <Meta
+      title={title ? `${title} · ${SITE_TITLE}` : SITE_TITLE}
+      description={description ?? SITE_DESCRIPTION}
+    />
   </head>
+
   <body>
     <div class="flex flex-col h-full mb-8 antialiased">
       <Header />
@@ -27,4 +46,3 @@ const { title, description } = Astro.props;
     </div>
   </body>
 </html>
-

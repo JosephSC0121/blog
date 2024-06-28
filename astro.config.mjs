@@ -6,7 +6,7 @@ import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
 import node from "@astrojs/node";
-
+import partytown from '@astrojs/partytown'
 // https://astro.build/config
 export default defineConfig({
   site: "https://euler.josephsilvacasas.com",
@@ -22,6 +22,10 @@ export default defineConfig({
     },
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex]
-  }), sitemap(), tailwind()],
+  }), sitemap(), tailwind(), partytown({
+    config: {
+      forward: ["dataLayer.push"],
+    },
+  })],
   output: "static"
 });
