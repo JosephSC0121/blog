@@ -1,20 +1,19 @@
 ---
 title: "Project Euler #1 - Multiplos de 3 o 5"
 description: "Primer ejercicio del project Euler"
-date: "2024-05-01"
+date: "2024-06-28"
 tags: ["go", "python"]
-cover: "https://images.unsplash.com/photo-1579762593175-20226054cad0"
+cover: "/e1.png"
 ---
+###### Ilustración por [@nicol.s.art](https://www.instagram.com/nicol.s.art/)
 > ### Multiplos de 3 o 5
 > #### Si enumeramos todos los números naturales menores a 10 que son múltiplos de 3 o 5, obtenemos 3, 5, 6 y 9. La suma de estos múltiplos es 23.
 
 <Notation type="underline"> El objetivo es encontrar la suma de todos los múltiplos de 3 o 5 menores a 1000. </Notation>
 
-
-
 ## Solución en Go
 
-Para resolver este problema en Go, utilizamos una función CalculateMultiples que toma un límite como argumento y retorna la suma de todos los múltiplos de 3 o 5 menores a ese límite. Aquí está el código:
+Para resolver este problema en Go, se utiliza una función `CalculateMultiples` que toma un límite como argumento y retorna la suma de todos los múltiplos de 3 o 5 menores a ese límite. Aquí está el código:
 
 ```go
 package exercises
@@ -30,17 +29,17 @@ func CalculateMultiples(limit int) int {
 }
 ```
 
-- Definimos una función `CalculateMultiples` que toma un entero limit como parámetro.
-- Inicializamos una variable `sum` en cero para almacenar la suma de los múltiplos.
-- Utilizamos un bucle for para recorrer todos los números desde 1 hasta limit - 1.
-- Dentro del bucle, verificamos si el número actual es múltiplo de 3 o 5 utilizando el operador módulo (%).
-- Si el número es múltiplo de 3 o 5, lo añadimos a `sum`.
-- Finalmente, retornamos el valor de `sum`.
+
+- Se define una función `CalculateMultiples` que toma un entero limit como parámetro.
+- Se inicializa una variable sum en cero para almacenar la suma de los múltiplos.
+- Se utiliza un bucle for para recorrer todos los números desde 1 hasta limit - 1.
+- Dentro del bucle, se verifica si el número actual es múltiplo de 3 o 5 utilizando el operador módulo (%).
+- Si el número es múltiplo de 3 o 5, se añade a `sum`.
+- Finalmente, se retorna el valor de `sum`.
 
 ## Solución en Python
 
-Para resolver el mismo problema en Python, creamos una función `sumDiv` que utiliza una comprensión de lista para sumar todos los múltiplos de 3 o 5 menores a un límite dado. Aquí está el código:
-
+Para resolver el mismo problema en Python, se crea una función `sumDiv` que utiliza una comprensión de lista para sumar todos los múltiplos de 3 o 5 menores a un límite dado. Aquí está el código:
  ```python
  import time
 
@@ -51,7 +50,7 @@ if __name__ == "__main__":
     print(sumDiv(1000))
 ```
 
-- Definimos una función `sumDiv` que toma un entero n como parámetro.
-- Utilizamos una comprensión de lista para generar una lista de números desde 1 hasta n - 1 que sean múltiplos de 3 o 5.
+- Se define una función `sumDiv` que toma un entero n como parámetro.
+- Se utiliza una comprensión de lista para generar una lista de números desde 1 hasta n - 1 que sean múltiplos de 3 o 5.
 - La función `sum` se utiliza para sumar todos los elementos de la lista generada.
-- En el bloque `if __name__ == "__main__":`, llamamos a `sumDiv` con el valor 1000 e imprimimos el resultado.
+- En el bloque `if __name__ == "__main__":`, se llama a `sumDiv` con el valor 1000 y se imprime el resultado.

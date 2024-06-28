@@ -1,8 +1,7 @@
 export const SITE_FAVICON = "/favicon.png";
-export const SITE_LOGO = "/avatar.png";
 export const SITE_TITLE = "Project Euler - Joseph";
 export const SITE_DESCRIPTION =
-  "Mia is designed to be minimalist yet powerful, integrating the capabilities of Astro, MDX, and Rough Notation. Whether you're a developer, writer, or just someone who loves clean and efficient design, this theme is perfect for you.";
+  "Este sitio web es una colección de mis soluciones a los problemas de Project Euler. Aquí compartiré mi enfoque tanto matemático como programático para cada ejercicio. ";
 
 export const MENUS = [
   {

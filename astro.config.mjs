@@ -1,30 +1,27 @@
 import mdx from "@astrojs/mdx";
-import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import { defineConfig } from "astro/config";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-theme-mia.pages.dev",
+  site: "https://euler.josephsilvacasas.com",
   trailingSlash: "never",
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: "viewport",
+    defaultStrategy: "viewport"
   },
-  integrations: [
-    mdx({
-      syntaxHighlight: "shiki",
-      shikiConfig: {
-        theme: "github-dark",
-      },
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
-    }),
-    sitemap(),
-    tailwind(),
-  ],
-  output: "static",
+  integrations: [mdx({
+    syntaxHighlight: "shiki",
+    shikiConfig: {
+      theme: "github-dark"
+    },
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex]
+  }), sitemap(), tailwind()],
+  output: "static"
 });

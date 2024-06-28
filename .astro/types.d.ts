@@ -143,13 +143,6 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".mdx"] };
-"project-euler-2.mdx": {
-	id: "project-euler-2.mdx";
-  slug: "project-euler-2";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".mdx"] };
 };
 
 	};
