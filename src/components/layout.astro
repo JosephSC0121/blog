@@ -17,10 +17,10 @@ const { title, description } = Astro.props;
   <head>
     <!-- Google tag (gtag.js) -->
     <script
-      type="text/partytown"
+    is:inline type="text/partytown"
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-QDRYY7YJLN"></script>
-    <script type="text/partytown">
+    <script is:inline type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
