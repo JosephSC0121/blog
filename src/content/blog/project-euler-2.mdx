@@ -5,6 +5,7 @@ date: "2024-06-28"
 tags: ["fibonacci", "go", "python"]
 cover: "/e2.png"
 ---
+
 ###### Ilustración por [@nicol.s.art](https://www.instagram.com/nicol.s.art/)
 
 ## Historia de Fibonacci
@@ -15,6 +16,9 @@ La famosa secuencia de Fibonacci tiene sus raíces en el siglo XII con Leonardo 
 
 La secuencia comienza con los números 0 y 1, y cada número subsiguiente es la suma de los dos números anteriores: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, y así sucesivamente. 
 
+<Latex formula='F(0) = 0'/>
+<Latex formula='F(1) = 1'/>
+<Latex formula='F(n) = F(n-1) + F(n-2)'/>
 
 ## Aplicaciones y Presencia en la Naturaleza
 
@@ -28,7 +32,7 @@ La secuencia de Fibonacci no solo es fascinante en términos matemáticos, sino 
 ### Fibonacci Par
 
 > #### Cada nuevo término en la secuencia de Fibonacci se genera sumando los dos términos anteriores.  Al comenzar con 1 y 2, los primeros 10 términos serán: 
-> #### 1,2,3,5,8,13,21,34,55,89… 
+> #### <Latex formula='1,2,3,5,8,13,21,34,55,89… '/>
 > #### Encuentra la suma de todos los términos pares en la secuencia de Fibonacci cuyo valor no exceda los cuatro millones.
 
 ### 
@@ -58,6 +62,36 @@ def even_fibonacci_sum(limit):
 if __name__ == "__main__":
     print(even_fibonacci_sum(4000000))
 ```
+## Solución en Go
+
+```go
+package exercises
+
+// FibonacciSum calcula la suma de los números de Fibonacci pares menores o iguales a un límite dado.
+func FibonacciSum(limit int) int {
+	// Se inicializan los primeros dos términos de la secuencia de Fibonacci modificada.
+	a, b := 2, 8
+	// La suma se inicializa con el primer número par, que es 2.
+	sum := 2
+
+	// El bucle se ejecuta mientras el término actual de Fibonacci no supere el límite.
+	for b <= limit {
+		// Se suma el término actual (que es par) a la suma total.
+		sum += b
+		// Se actualizan los términos de Fibonacci utilizando la fórmula para números pares.
+		a, b = b, 4*b+a
+	}
+
+	// Se retorna la suma total de los números de Fibonacci pares menores o iguales al límite.
+	return sum
+}
+```
 
 En la sucesión de Fibonacci, <Notation type="circle"> cada tercer término es par </Notation>. La fórmula de actualización `4 * b + a`  se basa en una propiedad derivada de la sucesión de Fibonacci para generar directamente los términos pares sin necesidad de calcular los intermedios.
 
+###
+###
+###
+###
+
+###### Si te gusta el contenido o tienes dudas/sugerencias escríbeme a [@josephsilva_21](https://www.instagram.com/josephsilva_21/)
