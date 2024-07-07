@@ -1,0 +1,63 @@
+---
+title: "Project Euler #2 - Números Fibonacci par"
+description: "Solución al segundo problema del Project Euler, suma de todos los términos pares en la secuencia de Fibonacci, implementado en Go y Python."
+date: "2024-06-28"
+tags: ["fibonacci", "go", "python"]
+cover: "/e2.png"
+---
+###### Ilustración por [@nicol.s.art](https://www.instagram.com/nicol.s.art/)
+
+## Historia de Fibonacci
+
+La famosa secuencia de Fibonacci tiene sus raíces en el siglo XII con Leonardo de Pisa, también conocido como Fibonacci. Este matemático italiano introdujo la secuencia en su libro "Liber Abaci" (1202), donde la utilizó para modelar un problema ficticio sobre la reproducción de conejos. Aunque la secuencia ya era conocida en matemáticas indias y árabes, fue Fibonacci quien la popularizó en Europa y la integró en la cultura matemática occidental.
+
+## Definición 
+
+La secuencia comienza con los números 0 y 1, y cada número subsiguiente es la suma de los dos números anteriores: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, y así sucesivamente. 
+
+
+## Aplicaciones y Presencia en la Naturaleza
+
+La secuencia de Fibonacci no solo es fascinante en términos matemáticos, sino que también se encuentra en diversos fenómenos naturales. Por ejemplo, se observa en la disposición de las hojas en las plantas, en la espiral de las conchas de caracol, en la estructura de las galaxias espirales, y en muchas otras formas en la naturaleza. Esta presencia sugiere que la secuencia de Fibonacci está relacionada con patrones de crecimiento eficientes y óptimos en la naturaleza.
+
+### Otros números relacionados con fibonacci
+
+- *Números de Lucas*: Los números de Lucas son una secuencia relacionada que comienza con 2 y 1 en lugar de 0 y 1, pero siguen la misma regla de suma.
+- *Ratio Áureo*: La relación entre dos números sucesivos en la secuencia de Fibonacci se aproxima al número áureo `(ϕ)`, aproximadamente 1.618, que tiene propiedades matemáticas y estéticas notables.
+
+### Fibonacci Par
+
+> #### Cada nuevo término en la secuencia de Fibonacci se genera sumando los dos términos anteriores.  Al comenzar con 1 y 2, los primeros 10 términos serán: 
+> #### 1,2,3,5,8,13,21,34,55,89… 
+> #### Encuentra la suma de todos los términos pares en la secuencia de Fibonacci cuyo valor no exceda los cuatro millones.
+
+### 
+
+
+<Notation type="underline"> El objetivo es encontrar la suma de todos los números fibonacci menores a 4 millones </Notation>
+
+## Solución en Python
+
+```python
+def even_fibonacci_sum(limit):
+    # Inicialización de los dos primeros términos pares y de la suma total
+    a, b = 2, 8
+    total_sum = a
+    
+    # Bucle que se ejecuta mientras el segundo término sea menor o igual al límite
+    while b <= limit:
+        # Sumar el término par actual a la suma total
+        total_sum += b
+        # Actualizar los términos: el nuevo a es el antiguo b, y el nuevo b se calcula como 4 * b + a
+        a, b = b, 4 * b + a
+    
+    # Retornar la suma total de los términos pares
+    return total_sum
+
+# Ejecución principal
+if __name__ == "__main__":
+    print(even_fibonacci_sum(4000000))
+```
+
+En la sucesión de Fibonacci, <Notation type="circle"> cada tercer término es par </Notation>. La fórmula de actualización `4 * b + a`  se basa en una propiedad derivada de la sucesión de Fibonacci para generar directamente los términos pares sin necesidad de calcular los intermedios.
+
