@@ -1,0 +1,72 @@
+---
+title: "Project Euler #9 - Triplete pitagórico"
+description: "Solución al noveno problema del Project Euler, hay exactamente un triplete pitagórico tal que a + b + c = 1000."
+date: "2024-07-13"
+tags: ["Pitágoras", "python"]
+cover: "/e9.webp"
+---
+
+###### Ilustración por [@nicol.s.art](https://www.instagram.com/nicol.s.art/)
+
+## ¿Quién fue Pitágoras?
+
+Pitágoras de Samos fue un filósofo y matemático griego nacido alrededor del 570 a.C. y fallecido alrededor del 495 a.C. Es más conocido por el Teorema de Pitágoras, pero su influencia en la filosofía y las matemáticas va mucho más allá. Fundó una escuela en Crotona, una colonia griega en el sur de Italia, donde enseñaba sus creencias filosóficas y matemáticas.
+
+## Filosofía y Matemáticas
+
+Pitágoras y sus seguidores, conocidos como pitagóricos, creían que la realidad en su esencia es matemática y que los números tienen propiedades místicas y divinas. Esta creencia llevó a la formulación de muchas teorías matemáticas y geométricas.
+
+<Notation type="highlight" color="blue"> Pitágoras y los pitagóricos creían que los números eran la esencia de todas las cosas y que el universo podía explicarse a través de las matemáticas</Notation>
+
+## El Teorema de Pitágoras
+
+
+El Teorema de Pitágoras es una relación fundamental en la geometría euclidiana entre los lados de un triángulo rectángulo. Establece que en un triángulo rectángulo, el cuadrado de la longitud de la hipotenusa (el lado opuesto al ángulo recto) es igual a la suma de los cuadrados de las longitudes de los otros dos lados. Matemáticamente, se expresa como:
+
+
+<Latex formula='a^2 + b^2 = c^2'/>
+
+## Datos Curiosos sobre Pitágoras
+
+    - La Sociedad Pitagórica:
+        La escuela de Pitágoras funcionaba casi como una sociedad secreta, con reglas estrictas y rituales. Los pitagóricos practicaban una vida comunal y creían en la reencarnación.
+
+    - Miedo a los Frijoles:
+        Una de las anécdotas más extrañas y fascinantes sobre Pitágoras es su supuesta aversión a los frijoles. 
+		Una leyenda particularmente extraña cuenta que Pitágoras murió porque se negó a huir a través de un campo de frijoles. 
+
+    - El Culto a los Números:
+        Los pitagóricos asignaban propiedades místicas a los números. Por ejemplo, consideraban al número 10 como el número más perfecto, representado por el tetractys, una figura triangular formada por 10 puntos dispuestos en cuatro filas.
+
+
+### Triplete pitagórico
+
+> #### Un triplete pitagórico es un conjunto de tres números naturales, a < b < c, para los cuales
+> #### <Latex formula='a^2+b^2=c^2'/>
+
+### 
+
+
+<Notation type="underline"> Existe exactamente un triplete pitagórico para el cual `a + b + c= 1000` Encuentra el producto `abc`.. </Notation>
+
+## Solución en Python
+
+```python
+def pitagoras_triplet():
+    # Itera sobre todos los posibles valores de 'a' en el rango [1, 999)
+    for a in range(1, 1000):
+        # Para cada 'a', itera sobre los valores de 'b' en el rango (a, 1000 - a)
+        for b in range(a + 1, 1000 - a):
+            # Calcula 'c' tal que la suma de 'a', 'b' y 'c' es 1000
+            c = 1000 - a - b
+            # Verifica la condición pitagórica: a^2 + b^2 = c^2
+            if a**2 + b**2 == c**2:
+                # Si se cumple la condición, retorna el producto abc
+                return a * b * c
+
+if __name__ == "__main__":
+    print(pitagoras_triplet())
+
+```
+
+###### Si te gusta el contenido o tienes dudas/sugerencias escríbeme a [@josephsilva_21](https://www.instagram.com/josephsilva_21/)
