@@ -1,0 +1,165 @@
+---
+title: "Fine-tuning de BERT para Clasificación de Emociones"
+description: "Entrena tu propia 'Emotion Machine' con Hugging Face y BERT usando un dataset sencillo y pocas líneas de código."
+date: "2025-07-27"
+tags: ["NLP", "fine-tuning"]
+cover: "/emotion.webp"
+---
+
+import img from "../../components/mdx/img.astro";
+
+# <Notation type="highlight">Construyendo una 'Emotion Machine' con BERT</Notation>
+
+La idea de una máquina que detecte emociones humanas, como en *The Big Bang Theory*, ya no es ciencia ficción. Gracias a modelos como **BERT** y a frameworks como **Hugging Face Transformers**, podemos entrenar nuestro propio clasificador de emociones con pocas líneas de código.
+
+En este post te mostraré cómo hacer un fine-tuning de un modelo preentrenado (`boltuix/bert-emotion`) para que aprenda a detectar emociones humanas a partir de texto.
+
+Codigo: https://github.com/JosephSC0121/hugging-face-projects
+
+---
+
+## <Notation type="underline">Fundamentos clave de NLP para Emotion Detection</Notation>
+
+Antes de comenzar el código, aclaremos algunos conceptos esenciales:
+
+- **Tokenización**: Divide el texto en unidades mínimas (tokens) que el modelo puede procesar.
+- **Embeddings**: Representaciones numéricas densas que codifican el significado de las palabras.
+- **Attention Mask**: Indica al modelo qué partes del texto son válidas y cuáles deben ser ignoradas (padding).
+- **Fine-tuning**: Ajustar un modelo preentrenado con un nuevo conjunto de datos específico.
+- **Logits**: Salidas sin normalizar del modelo, previas al cálculo de probabilidades.
+- **Trainer**: Clase de Hugging Face que simplifica el entrenamiento de modelos.
+
+---
+
+## <Notation type="highlight" color="gray">Fine-tuning con Hugging Face Transformers</Notation>
+
+### <Notation type="underline" color="purple">Paso 1: Preparar el Dataset</Notation>
+
+Usaremos un pequeño conjunto de frases etiquetadas con emociones:
+
+```python
+import pandas as pd
+from datasets import Dataset
+
+data = {
+    "text": [
+        "I love you so much!",
+        "This is absolutely disgusting!",
+        "I'm so happy with my new phone!",
+        "Why does this always break?",
+        "I feel so alone right now."
+    ],
+    "label": [2, 7, 5, 1, 0]  # Índices correspondientes a emociones
+}
+df = pd.DataFrame(data)
+dataset = Dataset.from_pandas(df)
+```
+
+Cada frase tiene asignada una etiqueta numérica que representa una emoción. Este es un ejemplo de dataset pequeño pero funcional para fine-tuning rápido.
+
+### <Notation type="underline" color="blue">Paso 2: Cargar el Modelo y el Tokenizador</Notation>
+
+```python
+from transformers import BertTokenizer, BertForSequenceClassification
+
+model_name = "boltuix/bert-emotion"
+tokenizer = BertTokenizer.from_pretrained(model_name)
+model = BertForSequenceClassification.from_pretrained(model_name, num_labels=13)
+```
+
+El modelo ya está preentrenado para clasificación de emociones, pero puedes ajustar sus pesos a tus propios datos.
+
+### <Notation type="underline" color="blue">Paso 3: Tokenizar los datos</Notation>
+
+```python
+def tokenize_function(examples):
+    return tokenizer(examples["text"], padding="max_length", truncation=True, max_length=64)
+
+tokenized_dataset = dataset.map(tokenize_function, batched=True)
+```
+
+Aquí convertimos las frases a tokens que el modelo entiende, y fijamos una longitud máxima para todos.
+
+### <Notation type="underline" color="gray">Paso 4: Convertir a formato Tensor (PyTorch)</Notation>
+
+```python
+import torch
+
+def to_torch_format(example):
+    return {
+        "input_ids": torch.tensor(example["input_ids"]),
+        "attention_mask": torch.tensor(example["attention_mask"]),
+        "label": torch.tensor(example["label"])
+    }
+
+tokenized_dataset = tokenized_dataset.map(to_torch_format)
+```
+
+### <Notation type="underline" color="purple">Paso 5: Configurar el Entrenamiento</Notation>
+
+```python
+
+from transformers import TrainingArguments
+
+training_args = TrainingArguments(
+    output_dir="./bert_emotion_results",
+    num_train_epochs=5,
+    per_device_train_batch_size=2,
+    logging_dir="./bert_emotion_logs",
+    logging_steps=10,
+    save_steps=100,
+    eval_strategy="no",
+    learning_rate=3e-5,
+)
+```
+Ajustamos los parámetros de entrenamiento como número de épocas, batch size y frecuencia de guardado de logs.
+
+### <Notation type="underline" color="purple">Paso 6: Entrenar con Trainer</Notation>
+```python
+from transformers import Trainer
+
+trainer = Trainer(
+    model=model,
+    args=training_args,
+    train_dataset=tokenized_dataset,
+)
+
+trainer.train()
+```
+
+### <Notation type="underline" color="blue">Paso 7: Guardar el Modelo Fine-tuneado</Notation>
+```python
+model.save_pretrained("./fine_tuned_bert_emotion")
+tokenizer.save_pretrained("./fine_tuned_bert_emotion")
+```
+
+## <Notation type="highlight">Predicción de Emociones en Nuevos Textos</Notation>
+### <Notation type="underline" color="gray">Inferencia con una frase nueva</Notation>
+
+```python
+text = "I'm sad!"
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model.to(device)
+
+inputs = {k: v.to(device) for k, v in tokenizer(text, return_tensors="pt", padding=True, truncation=True, max_length=64).items()}
+model.eval()
+with torch.no_grad():
+    outputs = model(**inputs)
+    logits = outputs.logits
+    predicted_class = torch.argmax(logits, dim=1).item()
+```
+
+### <Notation type="underline" color="blue">Etiquetas de emociones</Notation>
+```python
+labels = [
+    "Sadness", "Anger", "Love", "Surprise", "Fear", "Happiness",
+    "Neutral", "Disgust", "Shame", "Guilt", "Confusion", "Desire", "Sarcasm"
+]
+
+print(f"Predicted emotion for '{text}': {labels[predicted_class]}")
+```
+
+### <Notation type="highlight" color="gray">Conclusión</Notation>
+Con solo unas líneas de código y un pequeño dataset, es posible construir una Emotion Machine funcional. Modelos como BERT y herramientas como Hugging Face democratizan el acceso a la inteligencia artificial aplicada al lenguaje humano.
+
+Si te interesa construir modelos más complejos o desplegar esta solución en producción, ¡escríbeme!
