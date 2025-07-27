@@ -5,19 +5,14 @@ import { exercises } from "../helpers";
 ---
 
 <Layout>
-    <div class="max-w-screen-xl mx-auto px-4 py-12 sm:px-8">
-        <h2 class="text-4xl font-bold m-6">Hola! soy joseph</h2>
-        <p class="text-xl m-6">
-            Este sitio web es una colección de mis soluciones a una variedad de
-            problemas de programación, incluyendo los ejercicios de <a
-                class="text-xl text-primary"
-                href="https://projecteuler.net/"
-            >
-                Project Euler</a
-            >. Aquí compartiré mi enfoque tanto matemático como programático
-            para cada ejercicio.
-        </p>
-        <h2 class="text-4xl font-bold m-6">Ejercicios</h2>
-        <ExerciseListing exercises={exercises} />
+  <div class="bg-purple-300 py-6 sm:py-8">
+    <div class="max-w-screen-xl font-bold mx-auto px-4 sm:px-7 text-center">
+      <p class="text-sm sm:text-base text-gray-900">
+        Experimentos, ideas y soluciones técnicas — una bitácora de código útil (y algo nerd).
+      </p>
     </div>
+  </div>
+    <h2 class="text-4xl font-bold max-w-screen-xl mx-auto p-6 sm:px-8 text-center">Posts</h2>
+    <ExerciseListing exercises={exercises} />
 </Layout>
+

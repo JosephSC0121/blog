@@ -4,11 +4,6 @@ export const SITE_DESCRIPTION ="Este sitio web es una colección de mis solucion
 
 export const MENUS = [
   {
-    title: "Ejercicios",
-    link: "/exercises",
-    target: "_self",
-  },
-  {
     title: "Tags",
     link: "/tags",
     target: "_self",

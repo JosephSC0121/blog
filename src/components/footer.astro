@@ -2,38 +2,55 @@
 import Bmc from "../../public/Bmc.astro";
 import Linkedin from "../../public/Linkedin.astro";
 import Github from "../../public/Github.astro";
+import Instagram from "../../public/Instagram.astro";
+import Gmail from "../../public/Gmail.astro";
 ---
 
 <footer>
-  <div
-    class="flex flex-row items-center justify-center max-w-screen-md h-96 mx-auto px-4 sm:px-6"
-  >
-    <p
-      class="text-4xl leading-[60px] bg-clip-text text-center text-transparent bg-gradient-to-r from-orange-600 to-amber-600 font-title font-black"
-    >
+  <div class="max-w-screen-md mx-auto px-4 sm:px-6 py-12">
+    <p class="text-4xl leading-[60px] bg-clip-text text-center text-transparent bg-gradient-to-r from-orange-600 to-amber-600 font-title font-black mb-8">
+      <!-- Puedes colocar un mensaje aquí -->
     </p>
-    <div class="flex flex-col md:flex-row justify-center items-center">
-      <a
-        class="flex flex-row items-center rounded-xl p-5 text-xl"
-        href="https://www.linkedin.com/in/joseph-cristian-silva-casas/"
-      >
+
+    <!-- Contenedor flex para mantener los iconos en línea -->
+    <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6 lg:gap-8">
+      
+      <a class="flex items-center gap-2 text-base sm:text-lg lg:text-xl hover:scale-105 transition-transform" 
+         href="https://www.linkedin.com/in/joseph-cristian-silva-casas/">
         <Linkedin />
-        @joseph-silva-casas
-        <a
-          class="flex flex-row items-center rounded-xl p-5 color-whitetext-xl text-black bg-primary"
-          href="https://buymeacoffee.com/josephsc0121"
-        >
-          <Bmc />
-          Buy me a coffe
-          <a
-            class="flex flex-row items-center rounded-xl p-5 text-xl"
-            href="https://github.com/JosephSC0121"
-          >
-            <Github />
-            @JosephSC0121
-          </a>
-        </a>
+        <span class="hidden sm:inline">@joseph-silva-casas</span>
+        <span class="sm:hidden">LinkedIn</span>
       </a>
+
+      <a class="flex items-center gap-2 text-base sm:text-lg lg:text-xl hover:scale-105 transition-transform" 
+         href="https://github.com/JosephSC0121">
+        <Github />
+        <span class="hidden sm:inline">@JosephSC0121</span>
+        <span class="sm:hidden">GitHub</span>
+      </a>
+
+      <a class="flex items-center gap-2 text-base sm:text-lg lg:text-xl text-black bg-primary rounded-xl p-2 hover:scale-105 transition-transform" 
+         href="https://buymeacoffee.com/josephsc0121">
+        <Bmc />
+        <span class="hidden md:inline">Buy me a coffee</span>
+        <span class="md:hidden">Coffee</span>
+      </a>
+
+      <a class="flex items-center gap-2 text-base sm:text-lg lg:text-xl hover:scale-105 transition-transform" 
+         href="https://www.instagram.com/josephsilva_21">
+        <Instagram />
+        <span class="hidden sm:inline">@josephsilva_21</span>
+        <span class="sm:hidden">Instagram</span>
+      </a>
+
+      <a class="flex items-center gap-2 text-base sm:text-lg lg:text-xl hover:scale-105 transition-transform" 
+         href="mailto:josephsilva0121@gmail.com">
+        <Gmail />
+        <span class="hidden lg:inline">josephsilva0121@gmail.com</span>
+        <span class="lg:hidden hidden sm:inline">Email</span>
+        <span class="sm:hidden">Gmail</span>
+      </a>
+      
     </div>
   </div>
 </footer>
